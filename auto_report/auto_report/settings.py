@@ -41,7 +41,7 @@ DEFAULT_APPS = [
 ]
 
 ADDED_APPS = [
-    
+    "backend",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + ADDED_APPS
