@@ -23,7 +23,7 @@ class Role(TimeBasedModel):
         verbose_name_plural = "Роли"
         ordering = ["-name"]
         
-    name = models.CharField("Роль пользователя", verbose_name="Название роли", max_length=255) 
+    name = models.CharField(verbose_name="Название роли", max_length=255) 
     
     def __str__(self) -> str:
         return self.name
