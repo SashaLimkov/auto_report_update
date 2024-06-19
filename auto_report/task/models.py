@@ -1,5 +1,5 @@
 from django.db import models
-from auto_report.backend.models import TimeBasedModel
+from backend.models import TimeBasedModel
 
 
 class Project(TimeBasedModel):
@@ -30,9 +30,9 @@ class TaskData(TimeBasedModel):
         related_name="task_name",
         verbose_name="Название задачи",
     )
-    status: str = models.CharField("Статус выполнения задачи")
-    priority: str = models.CharField("Приоритет задачи")
-    ready: str = models.CharField("Статус готовности задачи")
+    status: str = models.CharField("Статус выполнения задачи", max_length=128)
+    priority: str = models.CharField("Приоритет задачи", max_length=128)
+    ready: str = models.CharField("Статус готовности задачи",max_length=128)
     time_manage: float = models.IntegerField("Оценка временных затрат")
     work_manage: float = models.IntegerField("Трудозатраты")
     initiator: str = models.CharField(
@@ -41,7 +41,7 @@ class TaskData(TimeBasedModel):
     description: str = models.TextField(
         "Описание", max_length=255, null=True, blank=True, default=None
     )
-    task_type: str = models.CharField("Тип задачи")
+    task_type: str = models.CharField("Тип задачи", max_length=128)
 
     def __str__(self):
-        return self.project_name
+        return self.project_name.__str__()

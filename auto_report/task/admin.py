@@ -1,9 +1,9 @@
 from django.contrib import admin
-from auto_report.task.models import *
+from task.models import *
 
 
 class MyAdminSite(admin.AdminSite):
-    site_header = "Надстройки"
+    site_header = "Информация о проектах"
 
 
 task_admin = MyAdminSite(name="task-admin")

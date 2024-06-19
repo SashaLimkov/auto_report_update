@@ -20,10 +20,12 @@ from telegram.admin import tg_admin
 from django.urls import path
 from auto_report import settings
 from django.conf.urls.static import static
+from task.admin import task_admin
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("tg-admin/", tg_admin.urls)
+    path("tg-admin/", tg_admin.urls),
+    path("task-admin/", task_admin.urls),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
