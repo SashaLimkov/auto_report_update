@@ -1,3 +1,13 @@
 from django.contrib import admin
+from auto_report.task.models import *
 
-# Register your models here.
+
+class MyAdminSite(admin.AdminSite):
+    site_header = "Надстройки"
+
+
+task_admin = MyAdminSite(name="task-admin")
+
+
+task_admin.register(Project)
+task_admin.register(TaskData)
