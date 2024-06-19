@@ -42,6 +42,7 @@ DEFAULT_APPS = [
 
 ADDED_APPS = [
     "backend",
+    "telegram"
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + ADDED_APPS
