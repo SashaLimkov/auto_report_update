@@ -40,10 +40,7 @@ DEFAULT_APPS = [
     "django.contrib.staticfiles",
 ]
 
-ADDED_APPS = [
-    "backend",
-    "telegram"
-]
+ADDED_APPS = ["backend", "telegram", "task"]
 
 INSTALLED_APPS = DEFAULT_APPS + ADDED_APPS
 
