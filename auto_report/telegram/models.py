@@ -11,7 +11,7 @@ class TelegramUser(TimeBasedModel):
     name = models.CharField("ФИО из ТГ", max_length=128)
     telegram_id = models.BigIntegerField("Телеграм ID", unique=True)
     username = models.CharField("Ник Телеграм", max_length=128, null=True, blank=True, default=None)
-    role = models.ForeignKey("Role", on_delete=models.SET_NULL, null=True, blank=True, default=None, related_name="users")
+    role = models.ForeignKey("Role", on_delete=models.SET_NULL, null=True, blank=True, default=None, related_name="users", verbose_name="Роль пользователя")
     
     def __str__(self):
         return f"{self.name} {self.telegram_id} {self.pk}"
