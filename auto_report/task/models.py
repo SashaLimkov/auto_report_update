@@ -55,13 +55,11 @@ class Events(TimeBasedModel):
         TaskData,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True,
-        default=None,
         related_name="event_name",
-        verbose_name="Название задачи"
+        verbose_name="Задача"
     )
     start_time: str = models.DateTimeField("Время начала работы")
-    end_time: str = models.DateTimeField("Время окончания работы")
+    end_time: str = models.DateTimeField("Время окончания работы", blank=True, null=True)
     comments: str = models.TextField(
         "Комментарий разработчика", max_length=2048,
         default=None, null=True, blank=True
