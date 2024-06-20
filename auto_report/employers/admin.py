@@ -1,3 +1,6 @@
 from django.contrib import admin
+from task.admin import task_admin
+from employers.models import Employer
 
-# Register your models here.
+
+task_admin.register(Employer)
