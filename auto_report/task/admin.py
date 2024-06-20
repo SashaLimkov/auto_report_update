@@ -11,3 +11,4 @@ task_admin = MyAdminSite(name="task-admin")
 
 task_admin.register(Project)
 task_admin.register(TaskData)
+task_admin.register(Events)
