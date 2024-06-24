@@ -1,5 +1,6 @@
 from django.db import models
 from backend.models import TimeBasedModel
+from employers.models import Employer
 
 
 class Project(TimeBasedModel):
@@ -118,6 +119,13 @@ class Events(TimeBasedModel):
         null=True,
         related_name="event_name",
         verbose_name="Задача"
+    )
+    creator: str = models.ForeignKey(
+        Employer,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="Разработчик",
+        verbose_name="Работник"  
     )
     start_time: str = models.DateTimeField("Время начала работы")
     end_time: str = models.DateTimeField("Время окончания работы", blank=True, null=True)
