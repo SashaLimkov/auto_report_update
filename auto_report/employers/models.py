@@ -8,7 +8,8 @@ class Employer(TimeBasedModel):
         verbose_name = "Разработчик"
         verbose_name_plural = "Разработчики"
         ordering = ["-user_name"]
-
+        
+    # мейби стоит назвать developer или employer_name
     user_name: str = models.CharField("ФИО разработчика", max_length=128)
     tg_urls: str = models.ForeignKey(TelegramUser, on_delete=models.SET_NULL,null=True, verbose_name="Ссылка на телеграм")
     start_time: str = models.DateTimeField("Начало рабочего дня")
