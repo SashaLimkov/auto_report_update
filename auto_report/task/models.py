@@ -6,8 +6,10 @@ class Project(TimeBasedModel):
     class Meta:
         verbose_name = "Проект"
         verbose_name_plural = "Проекты"
-
-    project_name: str = models.CharField(verbose_name="Название задачи", max_length=255)
+        ordering=["-project_name"]
+        
+        
+    project_name: str = models.CharField(verbose_name="Название проекта", max_length=255)
 
     def __str__(self):
         return self.project_name
@@ -17,18 +19,29 @@ class TaskData(TimeBasedModel):
     class Meta:
         verbose_name = "Текущая задача"
         verbose_name_plural = "Список задач"
-        ordering = ["-project_name"]
-
-    project_name: str = models.ForeignKey(
+        ordering = ["-task_number"]
+    
+    class Status(models.TextChoices):
+        NEW = "1", "Новая"
+        IN_PROCESS = "2", "В работе"
+        FEED_BACK = "3", "Обратная связь"
+        SOLVED = "4", "Решена"
+        CLOSED = "5", "Закрыта"
+        PAUSED = "6", "Пауза"
+        REJECTED = "7", "Отклонена"
+        
+    
+    project: str = models.ForeignKey(
         Project,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         default=None,
-        related_name="task_name",
-        verbose_name="Название проекта",
+        related_name="tasks",
+        verbose_name="Проект",
     )
-    status: str = models.CharField("Статус выполнения задачи", max_length=128)
+    task_number: str = models.IntegerField("Номер задачи", null=True, blank=True) 
+    status: str = models.CharField("Статус выполнения задачи", max_length=1, choices=Status.choices, null=True, blank=True)
     priority: str = models.CharField("Приоритет задачи", max_length=128)
     ready: str = models.CharField("Статус готовности задачи",max_length=128)
     time_manage: float = models.IntegerField("Оценка временных затрат")
