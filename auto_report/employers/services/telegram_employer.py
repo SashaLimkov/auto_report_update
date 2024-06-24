@@ -1,4 +1,4 @@
-from telegram.models import TelegramUser
+from employers.models import Employer
 
 
 def create_telegram_employer(
@@ -6,7 +6,7 @@ def create_telegram_employer(
     end_time: str, employer_status: str,
     tg_urls: str
     ):
-    employer = TelegramUser(
+    employer = Employer(
         user_name=user_name,
         start_time=start_time,
         end_time=end_time,
@@ -19,7 +19,7 @@ def create_telegram_employer(
 
 
 def get_all_employers():
-    return TelegramUser.objects.all()
+    return Employer.objects.all()
 
 
 def filter_employers_by_status():
