@@ -9,3 +9,4 @@ tg_admin = MyAdminSite(name="tg-admin")
 
 tg_admin.register(TelegramUser)
 tg_admin.register(Role)
+tg_admin.register(TGBot)

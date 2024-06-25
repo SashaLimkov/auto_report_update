@@ -43,7 +43,8 @@ DEFAULT_APPS = [
 ADDED_APPS = [
     "import_export","rangefilter",
     "backend", "telegram",
-    "task", "employers"
+    "task", "employers",
+    "TextData",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + ADDED_APPS
