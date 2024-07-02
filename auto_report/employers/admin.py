@@ -11,7 +11,7 @@ from import_export.admin import ExportActionMixin
 #     pass
 
 class EmployerAdmin(ExportActionMixin, admin.ModelAdmin):
-    list_display = ("user_name", "tg_urls", "start_time", "end_time", "employer_status", )
+    list_display = ("user_name", "start_time", "end_time", "employer_status", )
     list_filter = ("user_name", "employer_status", )
     search_fields = ("user_name", )
     inlines = (EventInline, )
