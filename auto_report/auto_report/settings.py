@@ -87,12 +87,21 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    }, 
+    # 'redmine':{
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'bitnami_redmine',
+    #     'USER': 'bitnami',
+    #     'PASSWORD': '7ad112c317',
+    #     'HOST': '172.16.1.154',
+    #     'PORT': '3306',
+    #     'CONN_MAX_AGE': 3600
+    # },
 }
 
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
+#         "ENGINE": "django.db.backends.postgresql", 
 #         "NAME": os.getenv("DB_NAME"),
 #         "USER": os.getenv("DB_USER"),
 #         "PASSWORD": os.getenv("DB_PASSWORD"),
