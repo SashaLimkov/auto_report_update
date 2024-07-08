@@ -5,3 +5,6 @@ black
 django-admin-rangefilter
 django-import-export
 fuzzywuzzy
+python-redmine
+qrcode
+pillow
