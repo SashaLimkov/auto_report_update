@@ -2,24 +2,30 @@ from employers.models import Employer
 
 
 def create_telegram_employer(
-    user_name: str, start_time: str,
-    end_time: str, employer_status: str,
-    tg_urls: str
+    user_name=str,
+    redmine_id=str,
+    redmine_url=str,
+    **args
     ):
     employer = Employer(
         user_name=user_name,
-        start_time=start_time,
-        end_time=end_time,
-        employer_status=employer_status,
-        tg_urls=tg_urls
+        redmine_id=redmine_id,
+        redmine_url=redmine_url,
+        **args,
     )
     employer.save()
-    
     return employer
+
+
 
 
 def get_all_employers():
     return Employer.objects.all()
+
+def get_employer_by_id(redmine_id:str):
+    return Employer.objects.filter(redmine_id=redmine_id).first()
+
+
 
 
 def filter_employers_by_status():
