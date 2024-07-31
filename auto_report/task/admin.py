@@ -19,6 +19,14 @@ class EventInline(admin.TabularInline):
     show_change_link = True
 
 
+class ProjectInline(admin.TabularInline):
+    model = Project
+    fields = ["project_name"]
+    readonly_fields = fields
+    extra = False
+    show_change_link = True
+
+
 
 class TaskDataAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ("task_number", "task_name", "status")
@@ -40,7 +48,7 @@ class TaskInline(admin.TabularInline):
 
 class ProjectAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ("project_name",)
-    search_fields = ("project_name",)
+    search_fields = ("project_name","redmine_id")
     search_help_text = "Введите название проекта"
     inlines = (TaskInline, )
 
@@ -50,8 +58,25 @@ class EventsAdmin(ExportActionMixin, admin.ModelAdmin):
     list_filter = ("event_status", "creator", )
     date_hierarchy = "start_time"
     
-    pass
+class UniqueProjectAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ("name", "fk_counter")
+    search_fields = ("name",)
+    inlines = (ProjectInline, )
+    actions  =  (
+        "update_counter",
+    )
+    
+    def update_counter(self, request, queryset):
+        for unique_project in queryset.all():
+            unique_project.fk_counter = unique_project.porjects.count()
+            unique_project.save()
+            
+    update_counter.short_description = "Обновить счетчики"
+
+
+    
     
 task_admin.register(Project, ProjectAdmin)
 task_admin.register(TaskData, TaskDataAdmin)
 task_admin.register(Events, EventsAdmin)
+task_admin.register(UniqueProject, UniqueProjectAdmin)

@@ -6,6 +6,7 @@ from aiogram.utils import exceptions
 
 from telegram.report_bot.config.loader import bot
 from telegram.report_bot.utils.deleter import try_delete_message
+from aiogram.utils.exceptions import MessageNotModified
 
 
 async def try_edit_message(
@@ -28,6 +29,17 @@ async def try_edit_message(
             message_id=main_message_id,
             reply_markup=keyboard if keyboard else None,
         )
+    except MessageNotModified as e:
+        data = await state.get_data()
+        prev_text = data.get("text")
+        if prev_text != text:
+            await try_send_message(
+                telegram_id, text, keyboard=keyboard, state=state
+            )
+            await try_delete_message(
+                chat_id=telegram_id,
+                message_id=main_message_id,
+            )
     except Exception as e:
         print(e)
         await try_send_message(
@@ -50,7 +62,7 @@ async def try_send_voice(telegram_id, text, voice, keyboard, state: FSMContext):
             caption=text,
             reply_markup=keyboard if keyboard else None,
         )
-        await state.update_data({"main_message_id": mes.message_id})
+        await state.update_data({"main_message_id": mes.message_id, "text": text})
         return mes.message_id
     except Exception:
         print(traceback.format_exc())
@@ -75,7 +87,9 @@ async def try_send_message( telegram_id, text, state: FSMContext, keyboard=None
         mes = await bot.send_message(
             chat_id=telegram_id, text=text, reply_markup=keyboard if keyboard else None
         )
-        await state.update_data({"main_message_id": mes.message_id})
+        await state.update_data({"main_message_id": mes.message_id,
+                                 "text":mes.text
+                                 })
         return mes.message_id
     except Exception:
         print(traceback.format_exc())

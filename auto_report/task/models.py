@@ -3,6 +3,18 @@ from backend.models import TimeBasedModel
 from employers.models import Employer
 
 
+class UniqueProject(TimeBasedModel):
+    class Meta:
+        verbose_name = "Уникальный проект"
+        verbose_name_plural = "Уникальные проекты"
+        ordering = ["-name"]
+
+    name = models.CharField("Название проекта", max_length=255)
+    fk_counter = models.IntegerField("Количество проектов", null=True, blank=True)
+    
+    def __str__(self):
+        return self.name
+
 class Project(TimeBasedModel):
     class Meta:
         verbose_name = "Проект"
@@ -11,7 +23,10 @@ class Project(TimeBasedModel):
         
         
     project_name: str = models.CharField(verbose_name="Название проекта", max_length=255)
-
+    redmine_id = models.IntegerField(verbose_name="ID проекта в redmine", unique=True, null=True)
+    redmine_url = models.CharField(verbose_name="Ссылка на проект", max_length=256, null=True, blank=True)
+    unique_project = models.ForeignKey(UniqueProject, on_delete=models.DO_NOTHING, null=True, blank=True, related_name="porjects")
+   
     def __str__(self):
         return self.project_name
 

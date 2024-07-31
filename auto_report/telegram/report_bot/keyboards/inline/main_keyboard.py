@@ -5,9 +5,20 @@ from telegram.report_bot.utils.base_keyboard_utils import (
 from telegram.report_bot.data import text_data as td
 from telegram.report_bot.utils.text import get_text
 from TextData.services.text import get_default_language
+from TextData.models import Language
+
 
 
 __all__ = ["back",]
+
+async def main_keyboard(lang:Language = get_default_language()):
+    keyboard = await get_base_keyboard(
+        keyboard_options={
+            "row_width": 1,
+        },
+    )
+    
+
 
 
 async def back():

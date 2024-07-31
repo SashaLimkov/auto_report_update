@@ -1,13 +1,14 @@
 from redminelib import Redmine
 from redminelib.exceptions import ForbiddenError
+import os
 
 
 class RedmineWorker:
     REDMINE_CONNECTION = {
-        "url":"http://172.16.1.154/redmine/",
-        "version" : "4.2.0",
-        "username" : "it_galimov",
-        "password" : "mansur22042"
+        "url": os.getenv("REDMINE_URL"),
+        "version" : os.getenv("VERSION"),
+        "username" : os.getenv("USERNAME"),
+        "password" : os.getenv("PASSWORD"),
     }    
     
     def __init__(self):
@@ -38,10 +39,6 @@ class RedmineWorker:
     @try_it
     def get_project_by_id(self,  project_id):
         return self.session.project.get(project_id)
-    
-    @try_it
-    def get_project_tasks(self,  project_id):
-        return self.session.issue.filter(project_id=project_id)
     
     @try_it
     def get_project_issues(self,  project_id):

@@ -1,3 +1,4 @@
+from pprint import pprint
 from redmine.redmine_worker import RedmineWorker
 
 rw = RedmineWorker()
@@ -21,8 +22,21 @@ def get_all_users():
     return employers_list
         
         
+def get_all_projcts():
+    projects = rw.get_all_projects()
+    projects_list = []
+    for project in projects:
+        projects_list.append(
+            {
+                "project_name": project.name,
+                "redmine_id": project.id,
+                "redmine_url": project.url,
+            }
+        )
+    return projects_list
 
 
+get_all_projcts()
 
 # [('issues', None),
 #  ('issues_assigned', None),
