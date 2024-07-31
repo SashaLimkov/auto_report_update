@@ -8,3 +8,4 @@ fuzzywuzzy
 python-redmine
 qrcode
 pillow
+python-dotenv
