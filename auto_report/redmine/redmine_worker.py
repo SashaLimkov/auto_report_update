@@ -2,13 +2,7 @@ from redminelib import Redmine
 from redminelib.exceptions import ForbiddenError
 
 
-class RedmineWorker:
-    REDMINE_CONNECTION = {
-        "url":"http://172.16.1.154/redmine/",
-        "version" : "4.2.0",
-        "username" : "it_galimov",
-        "password" : "mansur22042"
-    }    
+class RedmineWorker: 
     
     def __init__(self):
         self.session = Redmine(**self.REDMINE_CONNECTION)
